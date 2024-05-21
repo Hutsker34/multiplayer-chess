@@ -5,12 +5,14 @@ import InitGame from "./InitGame";
 import CustomDialog from "./components/CustomDialog";
 import socket from "./socket";
 import { TextField } from "@mui/material";
+import GameAI from './GameAI'
 
 export default function App() {
   const [username, setUsername] = useState("");
   const [usernameSubmitted, setUsernameSubmitted] = useState(false);
 
   const [room, setRoom] = useState("");
+  const [roomAI, setRoomAI] = useState(false);
   const [orientation, setOrientation] = useState("");
   const [players, setPlayers] = useState([]);
 
@@ -59,7 +61,7 @@ export default function App() {
           variant="standard"
         />
       </CustomDialog>
-      {room ? (
+      {room && (
         <Game
           room={room}
           orientation={orientation}
@@ -68,11 +70,19 @@ export default function App() {
           // the cleanup function will be used by Game to reset the state when a game is over
           cleanup={cleanup}
         />
-      ) : (
+      )}
+      {!room && !roomAI &&(
         <InitGame
           setRoom={setRoom}
+          setRoomAI={setRoomAI}
           setOrientation={setOrientation}
           setPlayers={setPlayers}
+        />
+      )}
+      {roomAI &&
+      (
+        <GameAI
+          orientation={orientation}
         />
       )}
     </Container>

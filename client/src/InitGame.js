@@ -3,7 +3,7 @@ import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
 import socket from "./socket";
 
-export default function InitGame({ setRoom, setOrientation, setPlayers }) {
+export default function InitGame({ setRoom, setOrientation, setPlayers, setRoomAI}) {
   const [roomDialogOpen, setRoomDialogOpen] = useState(false);
   const [roomInput, setRoomInput] = useState(""); // input state
   const [roomError, setRoomError] = useState("");
@@ -71,6 +71,15 @@ export default function InitGame({ setRoom, setOrientation, setPlayers }) {
         }}
       >
         Join a game
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          setRoomAI(true)
+          setOrientation("white");
+        }}
+      >
+        Play VS AI
       </Button>
     </Stack>
   );
