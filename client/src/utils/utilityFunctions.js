@@ -92,13 +92,18 @@ export const isInCheck = (game, inCheck, setInCheck, classes) => {
 
   const turn = game.turn();
 
-  if (game.in_check()) {
+  if (game.isCheck()) {
+    console.log('isChech',{
+      ...inCheck,
+      element: turn === "b" ? squareElementBlackKing : squareElementWhiteKing,
+      value: true,
+    })
     setInCheck({
       ...inCheck,
       element: turn === "b" ? squareElementBlackKing : squareElementWhiteKing,
       value: true,
     });
-  } else if (!game.in_check()) {
+  } else if (!game.isCheck()) {
     const prevCheckSquare = document.querySelector(`.${classes.inCheck}`);
 
     setInCheck({
